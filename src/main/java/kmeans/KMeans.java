@@ -41,12 +41,12 @@ public class KMeans extends Configured implements Tool {
             job.setJarByClass(KMeans.class); 
             job.setMapperClass(KMeansMapper.class);   
             job.setOutputKeyClass(Text.class);
-            job.setOutputValueClass(Text.class); 
-            FileInputFormat.addInputPath(job, new Path(args[0]));
-            FileOutputFormat.setOutputPath(job, new Path(args[1]));
-            // broadcast centroids for next iteration 
+            job.setOutputValueClass(Text.class);
             job.addCacheFile((new Path("centroids" + counter)).toUri());
             counter++;
+            FileInputFormat.addInputPath(job, new Path(args[0]));
+            FileOutputFormat.setOutputPath(job, new Path("centroids" + counter));
+            // broadcast centroids for next iteration 
             //termination condition ??
             return job.waitForCompletion(true)? 0 : 1;
         }
