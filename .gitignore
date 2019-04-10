@@ -23,6 +23,7 @@ hs_err_pid*
 
 # IntelliJ files
 .idea/*
+*.iml
 
 #input dir huge files
 input/*
