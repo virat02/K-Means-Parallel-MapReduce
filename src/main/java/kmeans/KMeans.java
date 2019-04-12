@@ -1,7 +1,5 @@
 package kmeans;
 
-import java.io.IOException;
-
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -17,6 +15,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
+import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 /**
  * Main class that executes the K Means Algorithm
@@ -26,56 +26,62 @@ public class KMeans extends Configured implements Tool {
 
     @Override
     public int run(final String[] args) throws Exception {
-        // TODO select initial K centroids
-        // Configuration conf = getConf();
-        // conf.set("K", args[2]);
-        // Job job = Job.getInstance(conf,"InitialCentroids");
-        // job.setJarByClass(KMeans.class); 
-        // job.setMapperClass(KMeansMapper.class);   
-        // job.setOutputKeyClass(Text.class);
-        // job.setOutputValueClass(Text.class); 
-        // FileInputFormat.addInputPath(job, new Path(args[0]));
-        // FileOutputFormat.setOutputPath(job, new Path(args[1]));
-        // return job.waitForCompletion(true)? 0 : 1;
 
         int counter = 0;
         boolean ret;
-        while(true){
+
+        //select initial K centroids
+        // Configuration conf1 = getConf();
+        // conf1.set("K", args[2]);
+        // Job job1 = Job.getInstance(conf1,"InitialCentroids");
+        // job1.setJarByClass(KMeans.class);
+        // job1.setMapperClass(KMeansMapper.class);
+        // job1.setOutputKeyClass(Text.class);
+        // job1.setOutputValueClass(Text.class);
+        // FileInputFormat.addInputPath(job1, new Path(args[0]));
+        // FileOutputFormat.setOutputPath(job1, new Path("centroids" + counter));
+        // return job1.waitForCompletion(true)?0:1;
+        String  K  = args[2];
+        while (true) {
             Configuration conf = getConf();
             conf.set("mapreduce.output.textoutputformat.separator", ":");
-            conf.set("K", args[2]);
-            Job job = Job.getInstance(conf,"clustering");
-            job.setJarByClass(KMeans.class); 
-            job.setMapperClass(KMeansMapper.class); 
-            job.setReducerClass(KMeansReducer.class);  
+            conf.set("K", K);
+            Job job = Job.getInstance(conf, "clustering");
+            job.setJarByClass(KMeans.class);
+            job.setMapperClass(KMeansMapper.class);
+            job.setReducerClass(KMeansReducer.class);
             job.setOutputKeyClass(IntWritable.class);
             job.setOutputValueClass(Text.class);
             FileInputFormat.addInputPath(job, new Path(args[0]));
 
-            // broadcast centroids for next iteration 
+            // broadcast centroids for next iteration
             FileSystem fs = FileSystem.get(conf);
             RemoteIterator<LocatedFileStatus> files = fs.listFiles(new Path("centroids" + counter), false);
-            while(files.hasNext()){
+            while (files.hasNext()) {
                 Path filePath = files.next().getPath();
-                logger.info("ADDING FILES TO CACHE : "+ filePath.toString());
-                job.addCacheFile(filePath.toUri());
+                String[] temp = filePath.toString().split("/");
+                if (!temp[temp.length - 1].contains("clusters")) {
+                    logger.info("ADDING FILES TO CACHE : " + filePath.toString());
+                    job.addCacheFile(filePath.toUri());
+                }
             }
-            
             counter++;
             FileOutputFormat.setOutputPath(job, new Path("centroids" + counter));
-            ret =  job.waitForCompletion(true);
-            
+            MultipleOutputs.addNamedOutput(job, "centroids", TextOutputFormat.class, IntWritable.class, Text.class);
+            MultipleOutputs.addNamedOutput(job, "clusters", TextOutputFormat.class, IntWritable.class, Text.class);
+            ret = job.waitForCompletion(true);
+
             // break on error
-            if (!ret){
+            if (!ret) {
                 break;
             }
 
-            //TODO termination condition 
-            if(counter == 2){
+            // TODO termination condition
+            if (counter == 10) {
                 break;
             }
         }
-        return ret? 0 : 1;
+        return ret ? 0 : 1;
     }
 
     public static void main(final String[] args) {

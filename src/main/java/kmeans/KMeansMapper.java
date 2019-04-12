@@ -50,14 +50,44 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
         }
     }
 
+    // Euclidian distance
+    // private Double distance(ArrayList<Double> centroid, ArrayList<Double> record)
+    // {
+    // double sum = 0.0;
+    // int size = centroid.size();
+    // // ignoring the last elememt ... which is the actual label for now
+    // for (int i = 0; i < size - 1; i++) {
+    // sum += Math.pow(centroid.get(i) - record.get(i), 2);
+    // }
+    // return Math.sqrt(sum);
+    // }
+
+    // Manhattan distance
+    // private Double distance(ArrayList<Double> centroid, ArrayList<Double> record)
+    // {
+    // double sum = 0.0;
+    // int size = centroid.size();
+    // // ignoring the last elememt ... which is the actual label for now
+    // for (int i = 0; i < size - 1; i++) {
+    // sum += Math.abs(centroid.get(i) - record.get(i));
+    // }
+    // return sum;
+    // }
+
+    // Minkowski distance
     private Double distance(ArrayList<Double> centroid, ArrayList<Double> record) {
         double sum = 0.0;
+        double q = 2;
         int size = centroid.size();
-        // ignoring the last elememt ... which is the actual label for now 
+        // ignoring the last element ... which is the actual label for now
         for (int i = 0; i < size - 1; i++) {
-            sum += Math.pow(centroid.get(i) - record.get(i), 2);
+            sum += Math.pow(centroid.get(i) - record.get(i),q);
         }
-        return Math.sqrt(sum);
+        // if (size > 0) {
+        //     sum += Math.pow(centroid.get(5) - record.get(5), q);
+        //     // sum += Math.pow(centroid.get(size - 1) - record.get(size - 1), q);
+        // }
+        return Math.pow(sum, 1.0 / q);
     }
 
     @Override
@@ -82,5 +112,14 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
         }
 
         context.write(new IntWritable(minCentroidKey), value);
+    }
+
+    @Override
+    protected void cleanup(Mapper<Object, Text, IntWritable, Text>.Context context)
+            throws IOException, InterruptedException {
+        super.cleanup(context);
+        for (int i = 0; i < K; i++) {
+            context.write(new IntWritable(i), new Text("NULL"));
+        }
     }
 }
