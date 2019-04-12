@@ -12,32 +12,31 @@ public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text>
     protected void reduce(IntWritable arg0, Iterable<Text> arg1,
             Reducer<IntWritable, Text, IntWritable, Text>.Context arg2) throws IOException, InterruptedException {
         ArrayList<Double> centroid = new ArrayList<Double>();
-        ArrayList<ArrayList<Double>> records = new ArrayList<>();
-        
+        int size = 0;
+        int numFields = 0;
+        boolean first = true;
+        int ctr = 0;
+
         for (Text t : arg1) {
-            ArrayList<Double> record = new ArrayList<Double>();
+            size++;
+            ctr = 0;
             for (String i : t.toString().split(";")) {
-                record.add(Double.parseDouble(i));
+                if (first) {
+                    numFields++;
+                    centroid.add(0.0);
+                }
+                centroid.set(ctr,centroid.get(ctr) + Double.parseDouble(i));
+                ctr++;
             }
-            records.add(record);
+            first = false;
         }
 
-        int size = records.get(0).size();
-        for (int i = 0; i < size; i++) {
-            centroid.add(0.0);
+
+        ArrayList<String> value = new ArrayList<String>();
+        for (int i = 0; i < numFields; i++) {
+            value.add(Double.toString(centroid.get(i) / size));
         }
 
-        for (ArrayList<Double> r : records) {
-            for (int i = 0; i < size; i++) {
-                centroid.set(i, centroid.get(i) + r.get(i));
-            }
-        }
-
-        String[] value = new String[size];
-        for (int i = 0; i < size; i++) {
-            value[i] = Double.toString(centroid.get(i) / records.size());
-        }
-
-        arg2.write(arg0, new Text(String.join(";", value)));
+        arg2.write(arg0, new Text(String.join(";",value)));
     }
 }
