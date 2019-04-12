@@ -39,7 +39,7 @@ public class KMeans extends Configured implements Tool {
         // return job.waitForCompletion(true)? 0 : 1;
 
         int counter = 0;
-        int ret;
+        boolean ret;
         while(true){
             Configuration conf = getConf();
             conf.set("mapreduce.output.textoutputformat.separator", ":");
@@ -63,14 +63,19 @@ public class KMeans extends Configured implements Tool {
             
             counter++;
             FileOutputFormat.setOutputPath(job, new Path("centroids" + counter));
-            ret =  job.waitForCompletion(true)? 0 : 1;
+            ret =  job.waitForCompletion(true);
+            
+            // break on error
+            if (!ret){
+                break;
+            }
 
             //TODO termination condition 
             if(counter == 2){
                 break;
             }
         }
-        return ret;
+        return ret? 0 : 1;
     }
 
     public static void main(final String[] args) {
