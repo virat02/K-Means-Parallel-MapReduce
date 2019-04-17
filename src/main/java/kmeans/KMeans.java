@@ -22,13 +22,18 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
  * Main class that executes the K Means Algorithm
  */
 public class KMeans extends Configured implements Tool {
+
+    public static enum counter {
+        terminate
+    };
+
     private static final Logger logger = LogManager.getLogger(KMeans.class);
 
     @Override
     public int run(final String[] args) throws Exception {
 
-        int counter = 0;
-        boolean ret;
+        int countr = 0;
+        boolean terminate = false;
 
         //select initial K centroids
         // Configuration conf1 = getConf();
@@ -41,6 +46,7 @@ public class KMeans extends Configured implements Tool {
         // FileInputFormat.addInputPath(job1, new Path(args[0]));
         // FileOutputFormat.setOutputPath(job1, new Path("centroids" + counter));
         // return job1.waitForCompletion(true)?0:1;
+
         String  K  = args[2];
         while (true) {
             Configuration conf = getConf();
@@ -56,37 +62,44 @@ public class KMeans extends Configured implements Tool {
 
             // broadcast centroids for next iteration
             FileSystem fs = FileSystem.get(conf);
-            RemoteIterator<LocatedFileStatus> files = fs.listFiles(new Path("centroids" + counter), false);
+            RemoteIterator<LocatedFileStatus> files = fs.listFiles(new Path("centroids" + countr), false);
             while (files.hasNext()) {
                 Path filePath = files.next().getPath();
                 String[] temp = filePath.toString().split("/");
-                if (!temp[temp.length - 1].contains("clusters")) {
+                if (temp[temp.length - 1].contains("part")) {
                     logger.info("ADDING FILES TO CACHE : " + filePath.toString());
                     job.addCacheFile(filePath.toUri());
                 }
             }
-            counter++;
-            FileOutputFormat.setOutputPath(job, new Path("centroids" + counter));
-            MultipleOutputs.addNamedOutput(job, "centroids", TextOutputFormat.class, IntWritable.class, Text.class);
-            MultipleOutputs.addNamedOutput(job, "clusters", TextOutputFormat.class, IntWritable.class, Text.class);
-            ret = job.waitForCompletion(true);
 
-            // break on error
-            if (!ret) {
+            countr++;
+            if(terminate){
+                FileOutputFormat.setOutputPath(job, new Path(args[1]));
+            } else {
+                FileOutputFormat.setOutputPath(job, new Path("centroids" + countr));
+            }
+            
+            MultipleOutputs.addNamedOutput(job, "clusters", TextOutputFormat.class, IntWritable.class, Text.class);
+
+            if(!job.waitForCompletion(true)){
+                return 1;
+            }
+
+            if(terminate){
                 break;
             }
 
-            // TODO termination condition
-            if (counter == 10) {
-                break;
+            if (job.getCounters().findCounter(counter.terminate).getValue() == 0) {
+                terminate = true;
             }
         }
-        return ret ? 0 : 1;
+
+        return 0;
     }
 
     public static void main(final String[] args) {
         if (args.length != 3) {
-            throw new Error("Two arguments required:\n<input-dir> <output-dir> <K>");
+            throw new Error("Three arguments required:\n<input-dir> <output-dir> <K>");
         }
 
         try {
