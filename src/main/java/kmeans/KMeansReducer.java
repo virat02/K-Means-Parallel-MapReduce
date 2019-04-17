@@ -77,13 +77,31 @@ public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text>
         }
 
         if(size > 0){
+
             ArrayList<String> value = new ArrayList<String>();
             for (int i = 0; i < numFields; i++) {
                 value.add(Double.toString(centroid.get(i) / size));
             }
+
+            int counter = 0;
+            double res;
+            boolean setcounter = false;
+            
+            for(String i: centroids[arg0.get()].split(";")){
+                res = Double.parseDouble(i) - Double.parseDouble(value.get(counter++));
+                if(res > 0.1){
+                    setcounter = true;
+                }
+            }
+
+            if(setcounter){
+                arg2.getCounter(KMeans.counter.terminate).increment(1);
+            }
+
             arg2.write(arg0, new Text(String.join(";",value)));
         }  else {
-            arg2.write(arg0, new Text(String.join(";",centroids[arg0.get()])));
+            // arg2.write(arg0, new Text(String.join(";",centroids[arg0.get()])));
+            arg2.write(arg0, new Text(""));
         }       
     }
 
