@@ -41,6 +41,12 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
                 String[] keyvalue = line.split(":");
                 int index = Integer.parseInt(keyvalue[0]);
                 String[] temp = keyvalue[1].split(";");
+
+                // bad initial cluster selection we have a cluster center with no points
+                if (temp.length == 0){
+                    continue;
+                }
+
                 ArrayList<Double> record = centroids.get(index);
                 for (String t : temp) {
                     record.add(Double.parseDouble(t));
@@ -63,32 +69,33 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
     // }
 
     // Manhattan distance
-    // private Double distance(ArrayList<Double> centroid, ArrayList<Double> record)
-    // {
-    // double sum = 0.0;
-    // int size = centroid.size();
-    // // ignoring the last elememt ... which is the actual label for now
-    // for (int i = 0; i < size - 1; i++) {
-    // sum += Math.abs(centroid.get(i) - record.get(i));
-    // }
-    // return sum;
-    // }
+    private Double distance(ArrayList<Double> centroid, ArrayList<Double> record)
+    {
+    double sum = 0.0;
+    int size = centroid.size();
+    // ignoring the last element ... which is the actual label for now
+    for (int i = 0; i < size - 1; i++) {
+    sum += Math.abs(centroid.get(i) - record.get(i));
+    }
+    return sum;
+    }
 
     // Minkowski distance
-    private Double distance(ArrayList<Double> centroid, ArrayList<Double> record) {
-        double sum = 0.0;
-        double q = 2;
-        int size = centroid.size();
-        // ignoring the last element ... which is the actual label for now
-        for (int i = 0; i < size - 1; i++) {
-            sum += Math.pow(centroid.get(i) - record.get(i),q);
-        }
-        // if (size > 0) {
-        //     sum += Math.pow(centroid.get(5) - record.get(5), q);
-        //     // sum += Math.pow(centroid.get(size - 1) - record.get(size - 1), q);
-        // }
-        return Math.pow(sum, 1.0 / q);
-    }
+    // private Double distance(ArrayList<Double> centroid, ArrayList<Double> record) {
+    //     double sum = 0.0;
+    //     // => manhattan distance
+    //     double q = 3;
+    //     int size = centroid.size();
+    //     // ignoring the last element ... which is the actual label for now
+    //     for (int i = 0; i < size - 1; i++) {
+    //         //considering only 0-alcohol, 6-flavinoids
+    //         if(!(i == 0 || i == 6)){
+    //             continue;
+    //         }
+    //         sum += Math.pow(centroid.get(i) - record.get(i),q);
+    //     }
+    //     return Math.pow(sum, 1.0 / q);
+    // }
 
     @Override
     public void map(final Object key, final Text value, final Context context)
