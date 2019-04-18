@@ -1,13 +1,18 @@
 package seqkmeans;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class SeqKMeans {
+
+    private static ArrayList<ArrayList<Double>> records = new ArrayList<>();
+    private static ArrayList<ArrayList<Double>> centroids = new ArrayList<>();
+    private static int k = 2;
+    private static HashMap<ArrayList<Double>, ArrayList<ArrayList<Double>>> result = new HashMap<>();
 
     // Manhattan distance
     private Double distance(ArrayList<Double> centroid, ArrayList<Double> record)
@@ -23,14 +28,38 @@ public class SeqKMeans {
 
     public static void main(String[] args) throws IOException {
 
+        // Building our dataset in memory
         BufferedReader br = new BufferedReader(new FileReader("input/winequality-red.csv"));
-        String label_line = br.readLine();
-        String[] recordValuesAsString = label_line.split(";");
-        ArrayList<Double> record = new ArrayList<>();
-
-        for (String s : recordValuesAsString) {
-            record.add(Double.parseDouble(s));
+        String line;
+        while ((line = br.readLine()) != null){
+            String[] recordValuesAsString = line.split(";");
+            ArrayList<Double> record = new ArrayList<>();
+            for (String s : recordValuesAsString) {
+                record.add(Double.parseDouble(s));
+            }
+            records.add(record);
         }
+        br.close();
+
+        // Selecting k centroids at random
+        // Reference - https://stackoverflow.com/questions/12487592/randomly-select-an-item-from-a-list
+        int i =0;
+        while (i < k){
+            Random random = new Random();
+            ArrayList<Double> centroid = records.get(random.nextInt(records.size()));
+            centroids.add(centroid);
+            i++;
+        }
+
+        // creating k entries in hashmap, one for each centroid
+        for (ArrayList<Double> c: centroids) {
+            result.put(c, new ArrayList<>());
+        }
+
+        result.get(centroids.get(0)).add(records.get(0));
+        System.out.println(result);
+        // running k means
+
 
     }
 }
