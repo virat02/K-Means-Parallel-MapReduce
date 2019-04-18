@@ -11,8 +11,9 @@ public class SeqKMeans {
 
     private static ArrayList<ArrayList<Double>> records = new ArrayList<>();
     private static ArrayList<ArrayList<Double>> centroids = new ArrayList<>();
-    private static int k = 10;
+    private static int k = 3;
     private static HashMap<ArrayList<Double>, Double> centroidMap = new HashMap<>();
+    private static HashMap<ArrayList<Double>, ArrayList<ArrayList<Double>>> clusterMap = new HashMap<>();
 
     // Manhattan distance
     private static Double distance(ArrayList<Double> centroid, ArrayList<Double> record)
@@ -60,6 +61,7 @@ public class SeqKMeans {
         Double j = 1.0;
         for (ArrayList<Double> c: centroids) {
             centroidMap.put(c, j);
+            clusterMap.put(c, new ArrayList<>());
             j++;
         }
 
@@ -69,23 +71,51 @@ public class SeqKMeans {
 //        }
     }
 
-    private static void kMeans(){
+    private static void evaluateCentroids(){
+        centroids.clear();
+        for (ArrayList<Double> c: clusterMap.keySet()) {
+            ArrayList<Double> new_c = new ArrayList<>();
+            for(int j = 0; j < clusterMap.get(c).get(0).size(); j++){
+                new_c.add(0.0);
+            }
+            for (ArrayList<Double> r: clusterMap.get(c)) {
+                int i = 0;
+                while (i < r.size() - 2){
+                    new_c.set(i, new_c.get(i) + (r.get(i)/clusterMap.get(c).size()));
+                    i++;
+                }
+            }
+            centroids.add(new_c);
+        }
+        clusterMap.clear();
+        centroidMap.clear();
+        fillCentroidMap();
+    }
 
+    private static void kMeans(){
         // running k means
         int size = records.get(0).size();
         boolean flag = false;
         do{
             for (ArrayList<Double> r: records) {
+
                 Double min_val = Double.MAX_VALUE;
+                ArrayList<Double> selected_c = null;
+                Double d;
+
                 for (ArrayList<Double> c: centroids) {
-                    Double d = distance(c, r);
+                    d = distance(c, r);
                     if (d < min_val){
-                        r.set(size-1, centroidMap.get(c));
-                        min_val =d;
-                        flag = true;
+                        selected_c = c;
+                        min_val = d;
                     }
                 }
+                System.out.println(selected_c);
+                clusterMap.get(selected_c).add(r);
+//                r.set(size-1, centroidMap.get(selected_c));
             }
+
+            evaluateCentroids(); // to recompute new centroids by averaging the records assigned to each
         } while(flag);
     }
 
@@ -97,7 +127,7 @@ public class SeqKMeans {
         kMeans();
 
         for (ArrayList<Double> r: records) {
-            System.out.println(r);
+//            System.out.println(r);
         }
     }
 }
