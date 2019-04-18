@@ -2,7 +2,7 @@
 
 # Customize these paths for your environment.
 # -----------------------------------------------------------
-K=2
+K=6
 hadoop.root=${HADOOP_HOME}
 jar.name=mr-demo-1.0.jar
 jar.path=target/${jar.name}
@@ -10,17 +10,20 @@ job.name=kmeans.KMeans
 local.input=input
 local.output=output
 local.log=log
+local.cachedFile=centroids0/part
 # Pseudo-Cluster Execution
 hdfs.user.name=joe
 hdfs.input=input
 hdfs.output=output
+hdfs.cachedFile=centroids0/part
 # AWS EMR Execution
 aws.emr.release=emr-5.20.0
 aws.region=us-east-1
-aws.bucket.name=jm-mr-project
+aws.bucket.name=mrprojectvtw
 aws.subnet.id=subnet-6356553a
 aws.input=input
 aws.output=output
+aws.cachedFile=centroids0/part
 aws.log.dir=log
 aws.num.nodes=2
 aws.instance.type=m4.large
@@ -38,7 +41,7 @@ clean-local-output:
 # Make sure Hadoop  is set up (in /etc/hadoop files) for standalone operation (not pseudo-cluster).
 # https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html#Standalone_Operation
 local: jar clean-local-output
-	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${local.input} ${local.output} ${K}
+	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${local.input} ${local.output} ${local.cachedFile} ${K}
 
 # Start HDFS
 start-hdfs:
@@ -85,12 +88,12 @@ download-output-hdfs: clean-local-output
 # Make sure Hadoop  is set up (in /etc/hadoop files) for pseudo-clustered operation (not standalone).
 # https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation
 pseudo: jar stop-yarn format-hdfs init-hdfs upload-input-hdfs start-yarn clean-local-output 
-	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${hdfs.input} ${hdfs.output} ${K}
+	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${hdfs.input} ${hdfs.output} ${hdfs.cachedFile} ${K}
 	make download-output-hdfs
 
 # Runs pseudo-clustered (quickie).
 pseudoq: jar clean-local-output clean-hdfs-output 
-	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${hdfs.input} ${hdfs.output} ${K}
+	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${hdfs.input} ${hdfs.output} ${hdfs.cachedFile} ${K}
 	make download-output-hdfs
 
 # Create S3 bucket.
@@ -116,7 +119,7 @@ aws: jar upload-app-aws delete-output-aws
 		--release-label ${aws.emr.release} \
 		--instance-groups '[{"InstanceCount":${aws.num.nodes},"InstanceGroupType":"CORE","InstanceType":"${aws.instance.type}"},{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"${aws.instance.type}"}]' \
 	    --applications Name=Hadoop \
-	    --steps '[{"Args":["${job.name}","s3://${aws.bucket.name}/${aws.input}","s3://${aws.bucket.name}/${aws.output}","${K}"],"Type":"CUSTOM_JAR","Jar":"s3://${aws.bucket.name}/${jar.name}","ActionOnFailure":"TERMINATE_CLUSTER","Name":"Custom JAR"}]' \
+	    --steps '[{"Args":["${job.name}","s3://${aws.bucket.name}/${aws.input}","s3://${aws.bucket.name}/${aws.output}","s3://${aws.bucket.name}/${aws.cachedFile}","${K}"],"Type":"CUSTOM_JAR","Jar":"s3://${aws.bucket.name}/${jar.name}","ActionOnFailure":"TERMINATE_CLUSTER","Name":"Custom JAR"}]' \
 		--log-uri s3://${aws.bucket.name}/${aws.log.dir} \
 		--use-default-roles \
 		--enable-debugging \
