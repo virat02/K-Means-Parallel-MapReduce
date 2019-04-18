@@ -1,5 +1,6 @@
+import sys
 
-file = open("winequality-red.csv", "r")
+file = open(sys.argv[1], "r")
 l = []
 
 text = file.read()
@@ -11,6 +12,6 @@ while (i<15000):
 
 final_text = "".join(l)
 
-writer = open("data.txt", "w")
+writer = open("input/normalized_data.csv", "w")
 writer.write(final_text)
 writer.close()

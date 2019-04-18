@@ -17,12 +17,12 @@ hdfs.output=output
 # AWS EMR Execution
 aws.emr.release=emr-5.20.0
 aws.region=us-east-1
-aws.bucket.name=jm-mr-page-rank
+aws.bucket.name=jm-mr-project
 aws.subnet.id=subnet-6356553a
 aws.input=input
 aws.output=output
 aws.log.dir=log
-aws.num.nodes=5
+aws.num.nodes=2
 aws.instance.type=m4.large
 # -----------------------------------------------------------
 

@@ -47,6 +47,7 @@ public class KMeans extends Configured implements Tool {
         // FileOutputFormat.setOutputPath(job1, new Path("centroids" + counter));
         // return job1.waitForCompletion(true)?0:1;
 
+        String fileName;
         String  K  = args[2];
         while (true) {
             Configuration conf = getConf();
@@ -60,15 +61,23 @@ public class KMeans extends Configured implements Tool {
             job.setOutputValueClass(Text.class);
             FileInputFormat.addInputPath(job, new Path(args[0]));
 
-            // broadcast centroids for next iteration
-            FileSystem fs = FileSystem.get(conf);
-            RemoteIterator<LocatedFileStatus> files = fs.listFiles(new Path("centroids" + countr), false);
-            while (files.hasNext()) {
-                Path filePath = files.next().getPath();
-                String[] temp = filePath.toString().split("/");
-                if (temp[temp.length - 1].contains("part")) {
-                    logger.info("ADDING FILES TO CACHE : " + filePath.toString());
-                    job.addCacheFile(filePath.toUri());
+
+            if (countr == 0){
+                fileName = "s3://centroids0";
+                job.addCacheFile((new Path(fileName)).toUri());
+            }
+            else{
+                // broadcast centroids for next iteration
+                FileSystem fs = FileSystem.get(conf);
+                fileName = "hdfs://centroids" + countr;
+                RemoteIterator<LocatedFileStatus> files = fs.listFiles(new Path(fileName), false);
+                while (files.hasNext()) {
+                    Path filePath = files.next().getPath();
+                    String[] temp = filePath.toString().split("/");
+                    if (temp[temp.length - 1].contains("part")) {
+                        logger.info("ADDING FILES TO CACHE : " + filePath.toString());
+                        job.addCacheFile(filePath.toUri());
+                    }
                 }
             }
 
@@ -76,7 +85,7 @@ public class KMeans extends Configured implements Tool {
             if(terminate){
                 FileOutputFormat.setOutputPath(job, new Path(args[1]));
             } else {
-                FileOutputFormat.setOutputPath(job, new Path("centroids" + countr));
+                FileOutputFormat.setOutputPath(job, new Path("hdfs://centroids" + countr));
             }
             
             MultipleOutputs.addNamedOutput(job, "clusters", TextOutputFormat.class, IntWritable.class, Text.class);
