@@ -11,7 +11,7 @@ public class SeqKMeans {
 
     private static ArrayList<ArrayList<Double>> records = new ArrayList<>();
     private static ArrayList<ArrayList<Double>> centroids = new ArrayList<>();
-    private static int k = 3;
+    private static int k = 5;
     private static HashMap<ArrayList<Double>, Double> centroidMap = new HashMap<>();
     private static HashMap<ArrayList<Double>, ArrayList<ArrayList<Double>>> clusterMap = new HashMap<>();
 
@@ -47,11 +47,17 @@ public class SeqKMeans {
     private static void selectRandomCentroids() {
         // Selecting k centroids at random
         // Reference - https://stackoverflow.com/questions/12487592/randomly-select-an-item-from-a-list
-        int i = 0;
-        while (i < k){
-            Random random = new Random();
-            ArrayList<Double> centroid = records.get(random.nextInt(records.size()));
-            centroids.add(centroid);
+        int i = 4;
+        while (i <= 4 + k){
+//            Random random = new Random();
+//            ArrayList<Double> centroid = records.get(random.nextInt(records.size()));
+            for (ArrayList<Double> r:records) {
+                if (r.get(r.size()-2) == i){
+                    centroids.add(r);
+                    i++;
+                    continue;
+                }
+            }
             i++;
         }
     }
@@ -72,7 +78,6 @@ public class SeqKMeans {
     }
 
     private static void evaluateCentroids(){
-        centroids.clear();
         for (ArrayList<Double> c: clusterMap.keySet()) {
             ArrayList<Double> new_c = new ArrayList<>();
             for(int j = 0; j < clusterMap.get(c).get(0).size(); j++){
@@ -87,16 +92,15 @@ public class SeqKMeans {
             }
             centroids.add(new_c);
         }
-        clusterMap.clear();
-        centroidMap.clear();
-        fillCentroidMap();
     }
 
     private static void kMeans(){
         // running k means
         int size = records.get(0).size();
-        boolean flag = false;
+        boolean flag = true;
+        int z = 0;
         do{
+            z++;
             for (ArrayList<Double> r: records) {
 
                 Double min_val = Double.MAX_VALUE;
@@ -110,12 +114,20 @@ public class SeqKMeans {
                         min_val = d;
                     }
                 }
-                System.out.println(selected_c);
+//                System.out.println(selected_c);
                 clusterMap.get(selected_c).add(r);
 //                r.set(size-1, centroidMap.get(selected_c));
             }
 
+            if (z == 1000)
+                break;
+
+            centroids.clear();
             evaluateCentroids(); // to recompute new centroids by averaging the records assigned to each
+            clusterMap.clear();
+            centroidMap.clear();
+            fillCentroidMap();
+
         } while(flag);
     }
 
@@ -123,11 +135,23 @@ public class SeqKMeans {
 
         readFile();
         selectRandomCentroids();
+        System.out.println("Random centroids");
+        System.out.println(centroids);
         fillCentroidMap();
         kMeans();
 
-        for (ArrayList<Double> r: records) {
+//        for (ArrayList<Double> r: records) {
 //            System.out.println(r);
+//        }
+
+        for (ArrayList<Double> k: clusterMap.keySet()) {
+            System.out.println();
+            System.out.println(k);
+            System.out.println();
+            for (ArrayList<Double> r: clusterMap.get(k)) {
+                System.out.println(r.get(r.size()- 2));
+            }
         }
+
     }
 }
