@@ -14,12 +14,11 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
 
 public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text> {
-    MultipleOutputs<IntWritable,Text> mos;
-    String [] centroids;
-    int K = 0;
+    private MultipleOutputs<IntWritable,Text> mos;
+    private String [] centroids;
 
     private void getDataFromCache(Reducer<IntWritable, Text, IntWritable, Text>.Context context) throws IOException {
-        K = context.getConfiguration().getInt("K", 0);
+        int K = context.getConfiguration().getInt("K", 0);
         URI[] files = context.getCacheFiles();
         centroids = new String[K];
 
@@ -43,18 +42,18 @@ public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text>
     protected void setup(Reducer<IntWritable, Text, IntWritable, Text>.Context context)
             throws IOException, InterruptedException {
         super.setup(context);
-        mos = new MultipleOutputs<IntWritable,Text>(context);
+        mos = new MultipleOutputs<>(context);
         getDataFromCache(context);
 
     }
     @Override
     protected void reduce(IntWritable arg0, Iterable<Text> arg1,
             Reducer<IntWritable, Text, IntWritable, Text>.Context arg2) throws IOException, InterruptedException {
-        ArrayList<Double> centroid = new ArrayList<Double>();
+        ArrayList<Double> centroid = new ArrayList<>();
         int size = 0;
         int numFields = 0;
         boolean first = true;
-        int ctr = 0;
+        int ctr;
 
         for (Text t : arg1) {
 
@@ -78,7 +77,7 @@ public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text>
 
         if(size > 0){
 
-            ArrayList<String> value = new ArrayList<String>();
+            ArrayList<String> value = new ArrayList<>();
             for (int i = 0; i < numFields; i++) {
                 value.add(Double.toString(centroid.get(i) / size));
             }

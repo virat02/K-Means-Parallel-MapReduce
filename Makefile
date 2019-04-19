@@ -8,8 +8,8 @@ jar.name=mr-demo-1.0.jar
 jar.path=target/${jar.name}
 job.name=kmeans.KMeans
 local.input=input
-local.output=output
-local.log=log
+local.output=output_5M_K6_3.5Gb
+local.log=log_5M_K6_3.5Gb
 local.cachedFile=centroids0/part
 # Pseudo-Cluster Execution
 hdfs.user.name=joe
@@ -19,13 +19,13 @@ hdfs.cachedFile=centroids0/part
 # AWS EMR Execution
 aws.emr.release=emr-5.20.0
 aws.region=us-east-1
-aws.bucket.name=mrprojectvtw
+aws.bucket.name=mrprojectvirat
 aws.subnet.id=subnet-6356553a
 aws.input=input
 aws.output=output
 aws.cachedFile=centroids0/part
 aws.log.dir=log
-aws.num.nodes=2
+aws.num.nodes=5
 aws.instance.type=m4.large
 # -----------------------------------------------------------
 
@@ -115,7 +115,7 @@ upload-app-aws:
 # Main EMR launch.
 aws: jar upload-app-aws delete-output-aws
 	aws emr create-cluster \
-		--name "K Means Hadoop" \
+		--name "K Means Hadoop_5_machines_3.8gb" \
 		--release-label ${aws.emr.release} \
 		--instance-groups '[{"InstanceCount":${aws.num.nodes},"InstanceGroupType":"CORE","InstanceType":"${aws.instance.type}"},{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"${aws.instance.type}"}]' \
 	    --applications Name=Hadoop \

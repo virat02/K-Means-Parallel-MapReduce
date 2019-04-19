@@ -15,8 +15,8 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
 
-    List<ArrayList<Double>> centroids = new ArrayList<>();
-    int K = 0;
+    private List<ArrayList<Double>> centroids = new ArrayList<>();
+    private int K = 0;
 
     @Override
     protected void setup(Mapper<Object, Text, IntWritable, Text>.Context context)
@@ -27,7 +27,7 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
         K = context.getConfiguration().getInt("K", 0);
 
         for (int i = 0; i < K; i++) {
-            centroids.add(new ArrayList<Double>());
+            centroids.add(new ArrayList<>());
         }
 
         for (URI f : files) {
@@ -56,25 +56,26 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
         }
     }
 
-    // Euclidian distance
-    private Double distance(ArrayList<Double> centroid, ArrayList<Double> record) {
-        double sum = 0.0;
-        int size = centroid.size();
-        // ignoring the last elememt ... which is the actual label for now
-        for (int i = 0; i < size - 1; i++) {
-            sum += Math.pow(centroid.get(i) - record.get(i), 2);
-        }
-        return Math.sqrt(sum);
-    }
+     //Euclidean distance
+     private Double distance(ArrayList<Double> centroid, ArrayList<Double> record)
+     {
+     double sum = 0.0;
+     int size = centroid.size();
+     // ignoring the last elememt ... which is the actual label for now
+     for (int i = 0; i < size - 1; i++) {
+     sum += Math.pow(centroid.get(i) - record.get(i), 2);
+     }
+     return Math.sqrt(sum);
+     }
 
     @Override
     public void map(final Object key, final Text value, final Context context)
             throws IOException, InterruptedException {
-        Double min = null;
-        Integer minCentroidKey = null;
+        double min = Double.MAX_VALUE;
+        int minCentroidKey = Integer.MAX_VALUE;
         int size = centroids.size();
-        double dist = 0;
-        ArrayList<Double> record = new ArrayList<Double>();
+        double dist;
+        ArrayList<Double> record = new ArrayList<>();
         String[] temp = value.toString().split(";");
         for (String t : temp) {
             record.add(Double.parseDouble(t));
@@ -82,7 +83,7 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
 
         for (int i = 0; i < size; i++) {
             dist = distance(centroids.get(i), record);
-            if (min == null || min > dist) {
+            if (min > dist) {
                 min = dist;
                 minCentroidKey = i;
             }
