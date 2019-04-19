@@ -43,7 +43,7 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
                 String[] temp = keyvalue[1].split(";");
 
                 // bad initial cluster selection we have a cluster center with no points
-                if (temp.length == 0){
+                if (temp.length == 0) {
                     continue;
                 }
 
@@ -57,45 +57,15 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
     }
 
     // Euclidian distance
-    // private Double distance(ArrayList<Double> centroid, ArrayList<Double> record)
-    // {
-    // double sum = 0.0;
-    // int size = centroid.size();
-    // // ignoring the last elememt ... which is the actual label for now
-    // for (int i = 0; i < size - 1; i++) {
-    // sum += Math.pow(centroid.get(i) - record.get(i), 2);
-    // }
-    // return Math.sqrt(sum);
-    // }
-
-    // Manhattan distance
-    private Double distance(ArrayList<Double> centroid, ArrayList<Double> record)
-    {
-    double sum = 0.0;
-    int size = centroid.size();
-    // ignoring the last element ... which is the actual label for now
-    for (int i = 0; i < size - 1; i++) {
-    sum += Math.abs(centroid.get(i) - record.get(i));
+    private Double distance(ArrayList<Double> centroid, ArrayList<Double> record) {
+        double sum = 0.0;
+        int size = centroid.size();
+        // ignoring the last elememt ... which is the actual label for now
+        for (int i = 0; i < size - 1; i++) {
+            sum += Math.pow(centroid.get(i) - record.get(i), 2);
+        }
+        return Math.sqrt(sum);
     }
-    return sum;
-    }
-
-    // Minkowski distance
-    // private Double distance(ArrayList<Double> centroid, ArrayList<Double> record) {
-    //     double sum = 0.0;
-    //     // => manhattan distance
-    //     double q = 3;
-    //     int size = centroid.size();
-    //     // ignoring the last element ... which is the actual label for now
-    //     for (int i = 0; i < size - 1; i++) {
-    //         //considering only 0-alcohol, 6-flavinoids
-    //         if(!(i == 0 || i == 6)){
-    //             continue;
-    //         }
-    //         sum += Math.pow(centroid.get(i) - record.get(i),q);
-    //     }
-    //     return Math.pow(sum, 1.0 / q);
-    // }
 
     @Override
     public void map(final Object key, final Text value, final Context context)
