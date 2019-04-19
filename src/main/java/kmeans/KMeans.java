@@ -1,8 +1,12 @@
 package kmeans;
 
 import org.apache.hadoop.mapreduce.Job;
+
+import java.net.URI;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
@@ -34,21 +38,8 @@ public class KMeans extends Configured implements Tool {
 
         int countr = 0;
         boolean terminate = false;
-
-        //select initial K centroids
-        // Configuration conf1 = getConf();
-        // conf1.set("K", args[2]);
-        // Job job1 = Job.getInstance(conf1,"InitialCentroids");
-        // job1.setJarByClass(KMeans.class);
-        // job1.setMapperClass(KMeansMapper.class);
-        // job1.setOutputKeyClass(Text.class);
-        // job1.setOutputValueClass(Text.class);
-        // FileInputFormat.addInputPath(job1, new Path(args[0]));
-        // FileOutputFormat.setOutputPath(job1, new Path("centroids" + counter));
-        // return job1.waitForCompletion(true)?0:1;
-
         String fileName;
-        String  K  = args[2];
+        String K = args[3];
         while (true) {
             Configuration conf = getConf();
             conf.set("mapreduce.output.textoutputformat.separator", ":");
@@ -61,40 +52,38 @@ public class KMeans extends Configured implements Tool {
             job.setOutputValueClass(Text.class);
             FileInputFormat.addInputPath(job, new Path(args[0]));
 
-
-            if (countr == 0){
-                fileName = "s3://centroids0";
-                job.addCacheFile((new Path(fileName)).toUri());
-            }
-            else{
+            if (countr == 0) {
+                job.addCacheFile((new Path(args[2])).toUri());
+            } else {
                 // broadcast centroids for next iteration
-                FileSystem fs = FileSystem.get(conf);
-                fileName = "hdfs://centroids" + countr;
-                RemoteIterator<LocatedFileStatus> files = fs.listFiles(new Path(fileName), false);
-                while (files.hasNext()) {
-                    Path filePath = files.next().getPath();
-                    String[] temp = filePath.toString().split("/");
+                fileName = "centroids" + countr;
+                // https://stackoverflow.com/questions/11342400/how-to-list-all-files-in-a-directory-and-its-subdirectories-in-hadoop-hdfs
+                FileSystem fs = FileSystem.get(new URI(fileName + "/"), conf);
+                FileStatus[] fileStatus = fs.listStatus(new Path(fileName + "/"));
+                for (FileStatus status : fileStatus) {
+                    String filePath = status.getPath().toString();
+                    String[] temp = filePath.split("/");
                     if (temp[temp.length - 1].contains("part")) {
-                        logger.info("ADDING FILES TO CACHE : " + filePath.toString());
-                        job.addCacheFile(filePath.toUri());
+                        logger.info("ADDING FILES TO CACHE : " + filePath);
+                        job.addCacheFile(new URI(filePath));
                     }
                 }
             }
 
             countr++;
-            if(terminate){
+            if (terminate) {
                 FileOutputFormat.setOutputPath(job, new Path(args[1]));
             } else {
-                FileOutputFormat.setOutputPath(job, new Path("hdfs://centroids" + countr));
+                FileOutputFormat.setOutputPath(job, new Path("centroids" + countr));
             }
-            
+
             MultipleOutputs.addNamedOutput(job, "clusters", TextOutputFormat.class, IntWritable.class, Text.class);
 
-            if(!job.waitForCompletion(true)){
+            if (!job.waitForCompletion(true)) {
                 return 1;
             }
 
-            if(terminate){
+            if (terminate) {
                 break;
             }
 
@@ -107,8 +96,8 @@ public class KMeans extends Configured implements Tool {
     }
 
     public static void main(final String[] args) {
-        if (args.length != 3) {
-            throw new Error("Three arguments required:\n<input-dir> <output-dir> <K>");
+        if (args.length != 4) {
+            throw new Error("Four arguments required:\n<input-dir> <output-dir> <centroids0> <K>");
         }
 
         try {
