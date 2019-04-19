@@ -1,0 +1,397 @@
+2019-04-19 21:03:09,894 INFO org.apache.hadoop.yarn.client.RMProxy (main): Connecting to ResourceManager at ip-172-31-95-26.ec2.internal/172.31.95.26:8032
+2019-04-19 21:03:10,932 INFO org.apache.hadoop.mapreduce.lib.input.FileInputFormat (main): Total input files to process : 1
+2019-04-19 21:03:10,945 INFO com.hadoop.compression.lzo.GPLNativeCodeLoader (main): Loaded native gpl library
+2019-04-19 21:03:10,949 INFO com.hadoop.compression.lzo.LzoCodec (main): Successfully loaded & initialized native-lzo library [hadoop-lzo rev bab859f34a291cb7b3f4e724b59e1b48af69016b]
+2019-04-19 21:03:11,420 INFO org.apache.hadoop.mapreduce.JobSubmitter (main): number of splits:56
+2019-04-19 21:03:11,654 INFO org.apache.hadoop.mapreduce.JobSubmitter (main): Submitting tokens for job: job_1555707662039_0001
+2019-04-19 21:03:12,320 INFO org.apache.hadoop.yarn.client.api.impl.YarnClientImpl (main): Submitted application application_1555707662039_0001
+2019-04-19 21:03:12,472 INFO org.apache.hadoop.mapreduce.Job (main): The url to track the job: http://ip-172-31-95-26.ec2.internal:20888/proxy/application_1555707662039_0001/
+2019-04-19 21:03:12,480 INFO org.apache.hadoop.mapreduce.Job (main): Running job: job_1555707662039_0001
+2019-04-19 21:03:25,746 INFO org.apache.hadoop.mapreduce.Job (main): Job job_1555707662039_0001 running in uber mode : false
+2019-04-19 21:03:25,748 INFO org.apache.hadoop.mapreduce.Job (main):  map 0% reduce 0%
+2019-04-19 21:03:49,894 INFO org.apache.hadoop.mapreduce.Job (main):  map 2% reduce 0%
+2019-04-19 21:03:51,903 INFO org.apache.hadoop.mapreduce.Job (main):  map 4% reduce 0%
+2019-04-19 21:04:04,967 INFO org.apache.hadoop.mapreduce.Job (main):  map 6% reduce 0%
+2019-04-19 21:04:08,984 INFO org.apache.hadoop.mapreduce.Job (main):  map 8% reduce 0%
+2019-04-19 21:04:10,996 INFO org.apache.hadoop.mapreduce.Job (main):  map 26% reduce 0%
+2019-04-19 21:04:12,001 INFO org.apache.hadoop.mapreduce.Job (main):  map 46% reduce 0%
+2019-04-19 21:04:13,009 INFO org.apache.hadoop.mapreduce.Job (main):  map 54% reduce 0%
+2019-04-19 21:04:14,019 INFO org.apache.hadoop.mapreduce.Job (main):  map 58% reduce 0%
+2019-04-19 21:04:15,027 INFO org.apache.hadoop.mapreduce.Job (main):  map 65% reduce 0%
+2019-04-19 21:04:16,034 INFO org.apache.hadoop.mapreduce.Job (main):  map 66% reduce 0%
+2019-04-19 21:04:17,038 INFO org.apache.hadoop.mapreduce.Job (main):  map 71% reduce 0%
+2019-04-19 21:04:29,095 INFO org.apache.hadoop.mapreduce.Job (main):  map 73% reduce 0%
+2019-04-19 21:04:32,115 INFO org.apache.hadoop.mapreduce.Job (main):  map 75% reduce 0%
+2019-04-19 21:04:33,119 INFO org.apache.hadoop.mapreduce.Job (main):  map 75% reduce 4%
+2019-04-19 21:04:35,126 INFO org.apache.hadoop.mapreduce.Job (main):  map 77% reduce 11%
+2019-04-19 21:04:36,131 INFO org.apache.hadoop.mapreduce.Job (main):  map 80% reduce 12%
+2019-04-19 21:04:37,137 INFO org.apache.hadoop.mapreduce.Job (main):  map 86% reduce 12%
+2019-04-19 21:04:38,143 INFO org.apache.hadoop.mapreduce.Job (main):  map 89% reduce 13%
+2019-04-19 21:04:39,146 INFO org.apache.hadoop.mapreduce.Job (main):  map 89% reduce 14%
+2019-04-19 21:04:40,150 INFO org.apache.hadoop.mapreduce.Job (main):  map 91% reduce 16%
+2019-04-19 21:04:41,153 INFO org.apache.hadoop.mapreduce.Job (main):  map 93% reduce 17%
+2019-04-19 21:04:45,167 INFO org.apache.hadoop.mapreduce.Job (main):  map 93% reduce 18%
+2019-04-19 21:04:48,178 INFO org.apache.hadoop.mapreduce.Job (main):  map 93% reduce 20%
+2019-04-19 21:04:53,200 INFO org.apache.hadoop.mapreduce.Job (main):  map 93% reduce 21%
+2019-04-19 21:04:54,203 INFO org.apache.hadoop.mapreduce.Job (main):  map 93% reduce 23%
+2019-04-19 21:04:56,212 INFO org.apache.hadoop.mapreduce.Job (main):  map 97% reduce 23%
+2019-04-19 21:04:57,215 INFO org.apache.hadoop.mapreduce.Job (main):  map 97% reduce 24%
+2019-04-19 21:04:58,219 INFO org.apache.hadoop.mapreduce.Job (main):  map 99% reduce 28%
+2019-04-19 21:04:59,223 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 31%
+2019-04-19 21:05:00,230 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 33%
+2019-04-19 21:05:02,236 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 36%
+2019-04-19 21:05:03,239 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 47%
+2019-04-19 21:05:04,245 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 58%
+2019-04-19 21:05:05,251 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 76%
+2019-04-19 21:05:06,254 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 77%
+2019-04-19 21:05:09,263 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 79%
+2019-04-19 21:05:11,270 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 81%
+2019-04-19 21:05:14,280 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 87%
+2019-04-19 21:05:15,284 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 93%
+2019-04-19 21:05:18,293 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 94%
+2019-04-19 21:05:21,308 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 95%
+2019-04-19 21:05:24,320 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 96%
+2019-04-19 21:05:27,330 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 97%
+2019-04-19 21:05:33,351 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 98%
+2019-04-19 21:05:35,360 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 99%
+2019-04-19 21:05:44,394 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 100%
+2019-04-19 21:05:49,413 INFO org.apache.hadoop.mapreduce.Job (main): Job job_1555707662039_0001 completed successfully
+2019-04-19 21:05:49,560 INFO org.apache.hadoop.mapreduce.Job (main): Counters: 57
+	File System Counters
+		FILE: Number of bytes read=1187778612
+		FILE: Number of bytes written=2388651896
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=6160
+		HDFS: Number of bytes written=3805141408
+		HDFS: Number of read operations=169
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=44
+		S3: Number of bytes read=3757894311
+		S3: Number of bytes written=0
+		S3: Number of read operations=0
+		S3: Number of large read operations=0
+		S3: Number of write operations=0
+	Job Counters 
+		Killed map tasks=2
+		Killed reduce tasks=1
+		Launched map tasks=56
+		Launched reduce tasks=20
+		Data-local map tasks=56
+		Total time spent by all maps in occupied slots (ms)=97806960
+		Total time spent by all reduces in occupied slots (ms)=86534784
+		Total time spent by all map tasks (ms)=2037645
+		Total time spent by all reduce tasks (ms)=901404
+		Total vcore-milliseconds taken by all map tasks=2037645
+		Total vcore-milliseconds taken by all reduce tasks=901404
+		Total megabyte-milliseconds taken by all map tasks=3129822720
+		Total megabyte-milliseconds taken by all reduce tasks=2769113088
+	Map-Reduce Framework
+		Map input records=23985000
+		Map output records=23985336
+		Map output bytes=3877098024
+		Map output materialized bytes=1188035508
+		Input split bytes=6160
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=6
+		Reduce shuffle bytes=1188035508
+		Reduce input records=23985336
+		Reduce output records=6
+		Spilled Records=47970672
+		Shuffled Maps =1064
+		Failed Shuffles=0
+		Merged Map outputs=1064
+		GC time elapsed (ms)=65792
+		CPU time spent (ms)=1039590
+		Physical memory (bytes) snapshot=54763216896
+		Virtual memory (bytes) snapshot=273729216512
+		Total committed heap usage (bytes)=49527914496
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	kmeans.KMeans$counter
+		terminate=5
+	File Input Format Counters 
+		Bytes Read=3757823436
+	File Output Format Counters 
+		Bytes Written=1408
+2019-04-19 21:05:49,634 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00000
+2019-04-19 21:05:49,634 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00001
+2019-04-19 21:05:49,634 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00002
+2019-04-19 21:05:49,634 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00003
+2019-04-19 21:05:49,634 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00004
+2019-04-19 21:05:49,634 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00005
+2019-04-19 21:05:49,634 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00006
+2019-04-19 21:05:49,635 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00007
+2019-04-19 21:05:49,635 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00008
+2019-04-19 21:05:49,635 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00009
+2019-04-19 21:05:49,635 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00010
+2019-04-19 21:05:49,635 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00011
+2019-04-19 21:05:49,635 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00012
+2019-04-19 21:05:49,635 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00013
+2019-04-19 21:05:49,635 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00014
+2019-04-19 21:05:49,635 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00015
+2019-04-19 21:05:49,635 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00016
+2019-04-19 21:05:49,638 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00017
+2019-04-19 21:05:49,638 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids1/part-r-00018
+2019-04-19 21:05:49,679 INFO org.apache.hadoop.yarn.client.RMProxy (main): Connecting to ResourceManager at ip-172-31-95-26.ec2.internal/172.31.95.26:8032
+2019-04-19 21:05:49,952 INFO org.apache.hadoop.mapreduce.lib.input.FileInputFormat (main): Total input files to process : 1
+2019-04-19 21:05:50,075 INFO org.apache.hadoop.mapreduce.JobSubmitter (main): number of splits:56
+2019-04-19 21:05:50,156 INFO org.apache.hadoop.mapreduce.JobSubmitter (main): Submitting tokens for job: job_1555707662039_0002
+2019-04-19 21:05:50,214 INFO org.apache.hadoop.yarn.client.api.impl.YarnClientImpl (main): Submitted application application_1555707662039_0002
+2019-04-19 21:05:50,218 INFO org.apache.hadoop.mapreduce.Job (main): The url to track the job: http://ip-172-31-95-26.ec2.internal:20888/proxy/application_1555707662039_0002/
+2019-04-19 21:05:50,218 INFO org.apache.hadoop.mapreduce.Job (main): Running job: job_1555707662039_0002
+2019-04-19 21:05:58,467 INFO org.apache.hadoop.mapreduce.Job (main): Job job_1555707662039_0002 running in uber mode : false
+2019-04-19 21:05:58,467 INFO org.apache.hadoop.mapreduce.Job (main):  map 0% reduce 0%
+2019-04-19 21:06:22,607 INFO org.apache.hadoop.mapreduce.Job (main):  map 4% reduce 0%
+2019-04-19 21:06:31,646 INFO org.apache.hadoop.mapreduce.Job (main):  map 5% reduce 0%
+2019-04-19 21:06:33,653 INFO org.apache.hadoop.mapreduce.Job (main):  map 6% reduce 0%
+2019-04-19 21:06:35,659 INFO org.apache.hadoop.mapreduce.Job (main):  map 14% reduce 0%
+2019-04-19 21:06:36,663 INFO org.apache.hadoop.mapreduce.Job (main):  map 16% reduce 0%
+2019-04-19 21:06:37,669 INFO org.apache.hadoop.mapreduce.Job (main):  map 24% reduce 0%
+2019-04-19 21:06:38,676 INFO org.apache.hadoop.mapreduce.Job (main):  map 30% reduce 0%
+2019-04-19 21:06:39,688 INFO org.apache.hadoop.mapreduce.Job (main):  map 46% reduce 0%
+2019-04-19 21:06:40,718 INFO org.apache.hadoop.mapreduce.Job (main):  map 57% reduce 0%
+2019-04-19 21:06:41,724 INFO org.apache.hadoop.mapreduce.Job (main):  map 62% reduce 0%
+2019-04-19 21:06:42,730 INFO org.apache.hadoop.mapreduce.Job (main):  map 70% reduce 0%
+2019-04-19 21:06:43,736 INFO org.apache.hadoop.mapreduce.Job (main):  map 71% reduce 0%
+2019-04-19 21:06:56,798 INFO org.apache.hadoop.mapreduce.Job (main):  map 73% reduce 1%
+2019-04-19 21:06:57,801 INFO org.apache.hadoop.mapreduce.Job (main):  map 73% reduce 4%
+2019-04-19 21:06:59,808 INFO org.apache.hadoop.mapreduce.Job (main):  map 73% reduce 6%
+2019-04-19 21:07:01,816 INFO org.apache.hadoop.mapreduce.Job (main):  map 77% reduce 6%
+2019-04-19 21:07:02,820 INFO org.apache.hadoop.mapreduce.Job (main):  map 82% reduce 11%
+2019-04-19 21:07:03,824 INFO org.apache.hadoop.mapreduce.Job (main):  map 89% reduce 12%
+2019-04-19 21:07:04,827 INFO org.apache.hadoop.mapreduce.Job (main):  map 93% reduce 12%
+2019-04-19 21:07:05,838 INFO org.apache.hadoop.mapreduce.Job (main):  map 95% reduce 13%
+2019-04-19 21:07:07,844 INFO org.apache.hadoop.mapreduce.Job (main):  map 95% reduce 15%
+2019-04-19 21:07:08,846 INFO org.apache.hadoop.mapreduce.Job (main):  map 95% reduce 16%
+2019-04-19 21:07:09,850 INFO org.apache.hadoop.mapreduce.Job (main):  map 96% reduce 16%
+2019-04-19 21:07:10,852 INFO org.apache.hadoop.mapreduce.Job (main):  map 96% reduce 17%
+2019-04-19 21:07:12,858 INFO org.apache.hadoop.mapreduce.Job (main):  map 97% reduce 17%
+2019-04-19 21:07:13,861 INFO org.apache.hadoop.mapreduce.Job (main):  map 99% reduce 17%
+2019-04-19 21:07:15,867 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 17%
+2019-04-19 21:07:16,871 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 63%
+2019-04-19 21:07:17,874 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 69%
+2019-04-19 21:07:20,886 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 78%
+2019-04-19 21:07:21,888 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 79%
+2019-04-19 21:07:22,892 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 87%
+2019-04-19 21:07:23,901 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 90%
+2019-04-19 21:07:26,910 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 91%
+2019-04-19 21:07:28,918 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 92%
+2019-04-19 21:07:32,931 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 93%
+2019-04-19 21:07:33,934 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 94%
+2019-04-19 21:07:38,950 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 95%
+2019-04-19 21:07:41,959 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 96%
+2019-04-19 21:07:44,971 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 97%
+2019-04-19 21:07:47,978 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 98%
+2019-04-19 21:07:52,999 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 99%
+2019-04-19 21:08:00,020 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 100%
+2019-04-19 21:08:04,036 INFO org.apache.hadoop.mapreduce.Job (main): Job job_1555707662039_0002 completed successfully
+2019-04-19 21:08:04,072 INFO org.apache.hadoop.mapreduce.Job (main): Counters: 56
+	File System Counters
+		FILE: Number of bytes read=1182548492
+		FILE: Number of bytes written=2378372008
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=111760
+		HDFS: Number of bytes written=3805141411
+		HDFS: Number of read operations=1594
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=44
+		S3: Number of bytes read=3757818684
+		S3: Number of bytes written=0
+		S3: Number of read operations=0
+		S3: Number of large read operations=0
+		S3: Number of write operations=0
+	Job Counters 
+		Killed map tasks=2
+		Killed reduce tasks=1
+		Launched map tasks=56
+		Launched reduce tasks=20
+		Data-local map tasks=56
+		Total time spent by all maps in occupied slots (ms)=84893040
+		Total time spent by all reduces in occupied slots (ms)=62566944
+		Total time spent by all map tasks (ms)=1768605
+		Total time spent by all reduce tasks (ms)=651739
+		Total vcore-milliseconds taken by all map tasks=1768605
+		Total vcore-milliseconds taken by all reduce tasks=651739
+		Total megabyte-milliseconds taken by all map tasks=2716577280
+		Total megabyte-milliseconds taken by all reduce tasks=2002142208
+	Map-Reduce Framework
+		Map input records=23985000
+		Map output records=23985336
+		Map output bytes=3877098024
+		Map output materialized bytes=1182686189
+		Input split bytes=6160
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=6
+		Reduce shuffle bytes=1182686189
+		Reduce input records=23985336
+		Reduce output records=6
+		Spilled Records=47970672
+		Shuffled Maps =1064
+		Failed Shuffles=0
+		Merged Map outputs=1064
+		GC time elapsed (ms)=52542
+		CPU time spent (ms)=948880
+		Physical memory (bytes) snapshot=51844984832
+		Virtual memory (bytes) snapshot=273408221184
+		Total committed heap usage (bytes)=46854045696
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=3757818684
+	File Output Format Counters 
+		Bytes Written=1411
+2019-04-19 21:08:04,083 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00000
+2019-04-19 21:08:04,083 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00001
+2019-04-19 21:08:04,083 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00002
+2019-04-19 21:08:04,083 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00003
+2019-04-19 21:08:04,083 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00004
+2019-04-19 21:08:04,083 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00005
+2019-04-19 21:08:04,083 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00006
+2019-04-19 21:08:04,083 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00007
+2019-04-19 21:08:04,083 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00008
+2019-04-19 21:08:04,084 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00009
+2019-04-19 21:08:04,084 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00010
+2019-04-19 21:08:04,084 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00011
+2019-04-19 21:08:04,084 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00012
+2019-04-19 21:08:04,084 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00013
+2019-04-19 21:08:04,084 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00014
+2019-04-19 21:08:04,084 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00015
+2019-04-19 21:08:04,084 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00016
+2019-04-19 21:08:04,084 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00017
+2019-04-19 21:08:04,084 INFO kmeans.KMeans (main): ADDING FILES TO CACHE : hdfs://ip-172-31-95-26.ec2.internal:8020/user/hadoop/centroids2/part-r-00018
+2019-04-19 21:08:04,118 INFO org.apache.hadoop.yarn.client.RMProxy (main): Connecting to ResourceManager at ip-172-31-95-26.ec2.internal/172.31.95.26:8032
+2019-04-19 21:08:04,372 INFO org.apache.hadoop.mapreduce.lib.input.FileInputFormat (main): Total input files to process : 1
+2019-04-19 21:08:04,458 INFO org.apache.hadoop.mapreduce.JobSubmitter (main): number of splits:56
+2019-04-19 21:08:04,510 INFO org.apache.hadoop.mapreduce.JobSubmitter (main): Submitting tokens for job: job_1555707662039_0003
+2019-04-19 21:08:04,559 INFO org.apache.hadoop.yarn.client.api.impl.YarnClientImpl (main): Submitted application application_1555707662039_0003
+2019-04-19 21:08:04,565 INFO org.apache.hadoop.mapreduce.Job (main): The url to track the job: http://ip-172-31-95-26.ec2.internal:20888/proxy/application_1555707662039_0003/
+2019-04-19 21:08:04,565 INFO org.apache.hadoop.mapreduce.Job (main): Running job: job_1555707662039_0003
+2019-04-19 21:08:15,678 INFO org.apache.hadoop.mapreduce.Job (main): Job job_1555707662039_0003 running in uber mode : false
+2019-04-19 21:08:15,678 INFO org.apache.hadoop.mapreduce.Job (main):  map 0% reduce 0%
+2019-04-19 21:08:38,097 INFO org.apache.hadoop.mapreduce.Job (main):  map 2% reduce 0%
+2019-04-19 21:08:40,107 INFO org.apache.hadoop.mapreduce.Job (main):  map 4% reduce 0%
+2019-04-19 21:08:49,159 INFO org.apache.hadoop.mapreduce.Job (main):  map 5% reduce 0%
+2019-04-19 21:08:51,168 INFO org.apache.hadoop.mapreduce.Job (main):  map 9% reduce 0%
+2019-04-19 21:08:52,171 INFO org.apache.hadoop.mapreduce.Job (main):  map 13% reduce 0%
+2019-04-19 21:08:53,175 INFO org.apache.hadoop.mapreduce.Job (main):  map 18% reduce 0%
+2019-04-19 21:08:54,179 INFO org.apache.hadoop.mapreduce.Job (main):  map 24% reduce 0%
+2019-04-19 21:08:55,183 INFO org.apache.hadoop.mapreduce.Job (main):  map 28% reduce 0%
+2019-04-19 21:08:56,187 INFO org.apache.hadoop.mapreduce.Job (main):  map 41% reduce 0%
+2019-04-19 21:08:57,192 INFO org.apache.hadoop.mapreduce.Job (main):  map 54% reduce 0%
+2019-04-19 21:08:58,197 INFO org.apache.hadoop.mapreduce.Job (main):  map 65% reduce 0%
+2019-04-19 21:08:59,202 INFO org.apache.hadoop.mapreduce.Job (main):  map 69% reduce 0%
+2019-04-19 21:09:00,206 INFO org.apache.hadoop.mapreduce.Job (main):  map 71% reduce 0%
+2019-04-19 21:09:14,269 INFO org.apache.hadoop.mapreduce.Job (main):  map 71% reduce 1%
+2019-04-19 21:09:15,272 INFO org.apache.hadoop.mapreduce.Job (main):  map 71% reduce 3%
+2019-04-19 21:09:17,279 INFO org.apache.hadoop.mapreduce.Job (main):  map 73% reduce 5%
+2019-04-19 21:09:18,283 INFO org.apache.hadoop.mapreduce.Job (main):  map 76% reduce 6%
+2019-04-19 21:09:19,290 INFO org.apache.hadoop.mapreduce.Job (main):  map 80% reduce 6%
+2019-04-19 21:09:20,293 INFO org.apache.hadoop.mapreduce.Job (main):  map 82% reduce 6%
+2019-04-19 21:09:21,298 INFO org.apache.hadoop.mapreduce.Job (main):  map 85% reduce 7%
+2019-04-19 21:09:22,303 INFO org.apache.hadoop.mapreduce.Job (main):  map 90% reduce 8%
+2019-04-19 21:09:23,306 INFO org.apache.hadoop.mapreduce.Job (main):  map 90% reduce 10%
+2019-04-19 21:09:24,310 INFO org.apache.hadoop.mapreduce.Job (main):  map 93% reduce 12%
+2019-04-19 21:09:25,313 INFO org.apache.hadoop.mapreduce.Job (main):  map 95% reduce 12%
+2019-04-19 21:09:26,317 INFO org.apache.hadoop.mapreduce.Job (main):  map 97% reduce 12%
+2019-04-19 21:09:27,321 INFO org.apache.hadoop.mapreduce.Job (main):  map 98% reduce 13%
+2019-04-19 21:09:28,324 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 13%
+2019-04-19 21:09:29,328 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 33%
+2019-04-19 21:09:30,332 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 53%
+2019-04-19 21:09:32,338 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 55%
+2019-04-19 21:09:33,341 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 56%
+2019-04-19 21:09:34,344 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 70%
+2019-04-19 21:09:35,347 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 71%
+2019-04-19 21:09:36,350 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 74%
+2019-04-19 21:09:37,353 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 80%
+2019-04-19 21:09:39,358 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 86%
+2019-04-19 21:09:41,367 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 92%
+2019-04-19 21:09:42,370 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 93%
+2019-04-19 21:09:44,376 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 94%
+2019-04-19 21:09:48,391 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 95%
+2019-04-19 21:09:50,397 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 96%
+2019-04-19 21:09:54,411 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 97%
+2019-04-19 21:09:56,418 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 98%
+2019-04-19 21:10:00,428 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 99%
+2019-04-19 21:10:11,463 INFO org.apache.hadoop.mapreduce.Job (main):  map 100% reduce 100%
+2019-04-19 21:10:18,488 INFO org.apache.hadoop.mapreduce.Job (main): Job job_1555707662039_0003 completed successfully
+2019-04-19 21:10:18,518 INFO org.apache.hadoop.mapreduce.Job (main): Counters: 57
+	File System Counters
+		FILE: Number of bytes read=1176098695
+		FILE: Number of bytes written=2365459028
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=111985
+		HDFS: Number of bytes written=0
+		HDFS: Number of read operations=1481
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=0
+		S3: Number of bytes read=3757844503
+		S3: Number of bytes written=3805141416
+		S3: Number of read operations=0
+		S3: Number of large read operations=0
+		S3: Number of write operations=0
+	Job Counters 
+		Killed map tasks=2
+		Killed reduce tasks=1
+		Launched map tasks=56
+		Launched reduce tasks=20
+		Data-local map tasks=56
+		Total time spent by all maps in occupied slots (ms)=85043856
+		Total time spent by all reduces in occupied slots (ms)=57065952
+		Total time spent by all map tasks (ms)=1771747
+		Total time spent by all reduce tasks (ms)=594437
+		Total vcore-milliseconds taken by all map tasks=1771747
+		Total vcore-milliseconds taken by all reduce tasks=594437
+		Total megabyte-milliseconds taken by all map tasks=2721403392
+		Total megabyte-milliseconds taken by all reduce tasks=1826110464
+	Map-Reduce Framework
+		Map input records=23985000
+		Map output records=23985336
+		Map output bytes=3877098024
+		Map output materialized bytes=1176225781
+		Input split bytes=6160
+		Combine input records=0
+		Combine output records=0
+		Reduce input groups=6
+		Reduce shuffle bytes=1176225781
+		Reduce input records=23985336
+		Reduce output records=6
+		Spilled Records=47970672
+		Shuffled Maps =1064
+		Failed Shuffles=0
+		Merged Map outputs=1064
+		GC time elapsed (ms)=84415
+		CPU time spent (ms)=708200
+		Physical memory (bytes) snapshot=61119778816
+		Virtual memory (bytes) snapshot=273969430528
+		Total committed heap usage (bytes)=55958306816
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	kmeans.KMeans$counter
+		terminate=1
+	File Input Format Counters 
+		Bytes Read=3757844503
+	File Output Format Counters 
+		Bytes Written=1416
