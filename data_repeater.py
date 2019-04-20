@@ -6,7 +6,7 @@ l = []
 text = file.read()
 file.close()
 i = 0
-while (i<20000):
+while (i<15000):
     l.append(text)
     i += 1
 
