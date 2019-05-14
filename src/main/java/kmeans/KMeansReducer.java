@@ -13,9 +13,12 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
 
+/**
+ * Reducer class, calculates new centroid from set of points.
+ */
 public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text> {
-    private MultipleOutputs<IntWritable,Text> mos;
-    private String [] centroids;
+    private MultipleOutputs<IntWritable, Text> mos;
+    private String[] centroids;
 
     private void getDataFromCache(Reducer<IntWritable, Text, IntWritable, Text>.Context context) throws IOException {
         int K = context.getConfiguration().getInt("K", 0);
@@ -46,6 +49,7 @@ public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text>
         getDataFromCache(context);
 
     }
+
     @Override
     protected void reduce(IntWritable arg0, Iterable<Text> arg1,
             Reducer<IntWritable, Text, IntWritable, Text>.Context arg2) throws IOException, InterruptedException {
@@ -57,7 +61,7 @@ public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text>
 
         for (Text t : arg1) {
 
-            if(t.toString().equals("NULL")){
+            if (t.toString().equals("NULL")) {
                 continue;
             }
 
@@ -69,13 +73,13 @@ public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text>
                     numFields++;
                     centroid.add(0.0);
                 }
-                centroid.set(ctr,centroid.get(ctr) + Double.parseDouble(i));
+                centroid.set(ctr, centroid.get(ctr) + Double.parseDouble(i));
                 ctr++;
             }
             first = false;
         }
 
-        if(size > 0){
+        if (size > 0) {
 
             ArrayList<String> value = new ArrayList<>();
             for (int i = 0; i < numFields; i++) {
@@ -85,23 +89,22 @@ public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text>
             int counter = 0;
             double res;
             boolean setcounter = false;
-            
-            for(String i: centroids[arg0.get()].split(";")){
+
+            for (String i : centroids[arg0.get()].split(";")) {
                 res = Double.parseDouble(i) - Double.parseDouble(value.get(counter++));
-                if(res > 0.1){
+                if (res > 0.01) {
                     setcounter = true;
                 }
             }
 
-            if(setcounter){
+            if (setcounter) {
                 arg2.getCounter(KMeans.counter.terminate).increment(1);
             }
 
-            arg2.write(arg0, new Text(String.join(";",value)));
-        }  else {
-            // arg2.write(arg0, new Text(String.join(";",centroids[arg0.get()])));
+            arg2.write(arg0, new Text(String.join(";", value)));
+        } else {
             arg2.write(arg0, new Text(""));
-        }       
+        }
     }
 
     @Override

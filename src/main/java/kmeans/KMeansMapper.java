@@ -13,6 +13,9 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+/**
+ * Mapper class assigns each record to one of the centroids
+ */
 public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
 
     private List<ArrayList<Double>> centroids = new ArrayList<>();
@@ -56,17 +59,16 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
         }
     }
 
-     //Euclidean distance
-     private Double distance(ArrayList<Double> centroid, ArrayList<Double> record)
-     {
-     double sum = 0.0;
-     int size = centroid.size();
-     // ignoring the last elememt ... which is the actual label for now
-     for (int i = 0; i < size - 1; i++) {
-     sum += Math.pow(centroid.get(i) - record.get(i), 2);
-     }
-     return Math.sqrt(sum);
-     }
+    // Euclidean distance
+    private Double distance(ArrayList<Double> centroid, ArrayList<Double> record) {
+        double sum = 0.0;
+        int size = centroid.size();
+        // ignoring the last element, which is the actual label 
+        for (int i = 0; i < size - 1; i++) {
+            sum += Math.pow(centroid.get(i) - record.get(i), 2);
+        }
+        return Math.sqrt(sum);
+    }
 
     @Override
     public void map(final Object key, final Text value, final Context context)
